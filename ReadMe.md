@@ -44,7 +44,7 @@ A basic REST API that simulates a Bitcoin wallet, allowing users to:
 
  ### Start the FastAPI development server:
 
- - uvicorn main:app --reload
+ - uvicorn restapi.main:app --reload
 
 ### Accessing the API
 

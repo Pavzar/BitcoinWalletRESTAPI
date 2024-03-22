@@ -5,10 +5,10 @@ from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy import Boolean, cast
 from sqlalchemy.orm import Session
 from starlette import status
-from models import Transactions
-from database import get_db
-from schemas import TransactionsIn, TransferRequest, TransactionsOut
-from utils import generate_transaction_id, fetch_exchange_rate, process_transfer_transaction
+from .models import Transactions
+from .database import get_db
+from .schemas import TransactionsIn, TransferRequest, TransactionsOut
+from .utils import generate_transaction_id, fetch_exchange_rate, process_transfer_transaction
 
 app = FastAPI()
 db_dependency = Annotated[Session, Depends(get_db)]
@@ -51,7 +51,7 @@ async def get_balance(db: db_dependency):
     total_btc = sum(tx.amount for tx in unspent_txs)
     exchange_rate = fetch_exchange_rate()
     balance_eur = round(total_btc * exchange_rate, 2)
-    return {"balance:": {"btc": total_btc, "eur": balance_eur}}
+    return {"balance": {"btc": total_btc, "eur": balance_eur}}
 
 
 @app.post("/transfer", status_code=status.HTTP_201_CREATED)

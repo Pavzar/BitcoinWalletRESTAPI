@@ -5,7 +5,7 @@ import requests
 from fastapi import HTTPException
 from starlette import status
 
-from models import Transactions
+from .models import Transactions
 
 EXCHANGE_RATE_URL = "http://api-cryptopia.adca.sh/v1/prices/ticker"
 getcontext().prec = 8
